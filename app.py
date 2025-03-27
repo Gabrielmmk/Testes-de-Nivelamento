@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 #Carrega os dados
 operadoras_df = pd.read_csv('../testeDeNivelamento/PostgreSQL/Relatorio_cadop.csv', delimiter=';')
+print(operadoras_df.columns)  # Mostra todas as colunas do CSV
+
 
 
 @app.route('/search', methods=['GET'])
@@ -13,7 +15,7 @@ def search_operadoras():
     query = request.args.get('query', '').lower()
 
     # Filtrar as operadoras com base na busca
-    resultados = operadoras_df[operadoras_df['NOME_OPERADORA'].str.contains(query, case=False, na=False)]
+    resultados = operadoras_df[operadoras_df['Razao_Social'].str.contains(query, case=False, na=False)]
 
     # Retornar os resultados como JSON
     return jsonify(resultados.to_dict(orient='records'))
