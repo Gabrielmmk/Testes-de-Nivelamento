@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 import pandas as pd
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 #Carrega os dados
 operadoras_df = pd.read_csv('../testeDeNivelamento/PostgreSQL/Relatorio_cadop.csv', delimiter=';')
